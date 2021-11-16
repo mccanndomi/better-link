@@ -1,24 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import dayjs from "dayjs";
+import useTrips from "./hooks/useTrips";
 
 function App() {
+  const { loading, data } = useTrips(140, dayjs().subtract(1, "hour"), dayjs());
+
+  if (loading) return <h1>loading...</h1>;
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>finished loading</h1>
+      <p>{JSON.stringify(data)}</p>
     </div>
   );
 }
