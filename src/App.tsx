@@ -10,7 +10,8 @@ function App() {
 
   return (
     <div className="App">
-      <h1>finished loading</h1>
+      <h1>BetterLink</h1>
+      <h3>finished loading</h3>
       <p>{JSON.stringify(data)}</p>
     </div>
   );
