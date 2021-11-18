@@ -27,6 +27,7 @@ const useTrips = (route_id: number, start: dayjs.Dayjs, end: dayjs.Dayjs) => {
         return response.json();
       })
       .then((json) => {
+        console.log("API call made");
         setData(json);
         setTrips(
           Array.from(json).map((trip) => {

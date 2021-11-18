@@ -1,3 +1,6 @@
+import { IStop } from "./IStop";
+import { IStopTime } from "./IStopTime";
+
 export interface ITrip {
   route_id: number;
   service_id: string;
@@ -9,4 +12,6 @@ export interface ITrip {
   wheelchair_accessible: number;
   bikes_allowed: number;
   date: string;
+  stops?: IStop[] | undefined;
+  stopTimes?: IStopTime[] | undefined;
 }

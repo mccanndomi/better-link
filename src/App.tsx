@@ -1,18 +1,14 @@
 import React from "react";
 import "./App.css";
-import dayjs from "dayjs";
-import useTrips from "./hooks/useTrips";
+import { Route } from "wouter";
+import RoutesPage from "./pages/RoutesPage";
+import RoutePage from "./pages/RoutePage";
 
 function App() {
-  const { loading, data } = useTrips(140, dayjs().subtract(1, "hour"), dayjs());
-
-  if (loading) return <h1>loading...</h1>;
-
   return (
     <div className="App">
-      <h1>BetterLink</h1>
-      <h3>finished loading</h3>
-      <p>{JSON.stringify(data)}</p>
+      <Route path="/routes" component={RoutesPage} />
+      <Route path="/routes/:id">{(params) => <RoutePage id={params.id} />}</Route>
     </div>
   );
 }

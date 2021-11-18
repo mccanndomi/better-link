@@ -1,0 +1,9 @@
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+p {
+  font-size: xx-small;
+  padding-right: 8px;
+}

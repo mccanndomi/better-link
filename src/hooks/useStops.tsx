@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { IStopTime } from "../interfaces/IStopTime";
+import { IStop } from "../interfaces/IStop";
 
-const useStopTimes = (trip_id: string) => {
+const useStopTimes = (stop_id: string) => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
-  const [stopTimes, setStopTimes] = useState<IStopTime[]>();
+  const [stops, setStops] = useState<IStop[]>();
 
   const fetchApi = (trip_id: string) => {
-    let url = "https://api.opendata.metlink.org.nz/v1/gtfs/stop_times?trip_id=" + trip_id;
+    //this api also takes in stop_id as a param. trip_id || stop_id NOT both
+    let url = "https://api.opendata.metlink.org.nz/v1/gtfs/stops?trip_id=" + trip_id;
 
     fetch(url, {
       headers: {
@@ -21,9 +22,9 @@ const useStopTimes = (trip_id: string) => {
       .then((json) => {
         console.log("API call made");
         setData(json);
-        setStopTimes(
+        setStops(
           Array.from(json).map((stopTime) => {
-            return stopTime as unknown as IStopTime;
+            return stopTime as unknown as IStop;
           })
         );
         setLoading(false);
@@ -31,9 +32,9 @@ const useStopTimes = (trip_id: string) => {
   };
 
   useEffect(() => {
-    fetchApi(trip_id);
+    fetchApi(stop_id);
   }, []);
 
-  return { loading, data, stopTimes };
+  return { loading, data, stops };
 };
 export default useStopTimes;
