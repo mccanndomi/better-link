@@ -13,9 +13,9 @@ function RoutesPage(): JSX.Element {
       ) : (
         routes?.map((route) => {
           return (
-            <Link key={route.id} href="/route">
-              {route.route_long_name}
-            </Link>
+            <div key={route.route_id}>
+              <Link to={`/routes/${route.route_id}`}>{route.route_long_name}</Link>
+            </div>
           );
         })
       )}

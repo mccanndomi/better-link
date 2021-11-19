@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import * as dayjs from "dayjs";
 import { ITrip } from "../interfaces/ITrip";
+import { IStopTime } from "../interfaces/IStopTime";
 
 const useTrips = (route_id: number, start: dayjs.Dayjs, end: dayjs.Dayjs) => {
   const [loading, setLoading] = useState(true);
@@ -28,13 +29,33 @@ const useTrips = (route_id: number, start: dayjs.Dayjs, end: dayjs.Dayjs) => {
       })
       .then((json) => {
         console.log("API call made");
+
         setData(json);
         setTrips(
           Array.from(json).map((trip) => {
-            return trip as unknown as ITrip;
+            let tmp = trip as unknown as ITrip;
+
+            fetch("https://api.opendata.metlink.org.nz/v1/gtfs/stop_times?trip_id=" + tmp.trip_id, {
+              headers: {
+                Accept: "application/json",
+                "X-Api-Key": "XnPEruR43jMSavfhQjKi326cwXn4knm78P7bvkY0",
+              },
+            })
+              .then((response) => {
+                return response.json();
+              })
+              .then((json) => {
+                console.log("API call made");
+                tmp.stopTimes = Array.from(json).map((stopTime) => {
+                  return stopTime as unknown as IStopTime;
+                });
+                setLoading(false);
+              });
+
+            return tmp;
           })
         );
-        setLoading(false);
+        return;
       });
   };
 
