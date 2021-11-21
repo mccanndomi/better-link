@@ -13,7 +13,7 @@ function RoutePage({ id }: any): JSX.Element {
         <p>loading...</p>
       ) : (
         trips?.map((trip) => {
-          return <TripRow trip={trip} />;
+          return <TripRow key={trip.trip_id} trip={trip} />;
         })
       )}
     </div>

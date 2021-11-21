@@ -31,30 +31,31 @@ const useTrips = (route_id: number, start: dayjs.Dayjs, end: dayjs.Dayjs) => {
         console.log("API call made");
 
         setData(json);
-        setTrips(
-          Array.from(json).map((trip) => {
-            let tmp = trip as unknown as ITrip;
 
-            fetch("https://api.opendata.metlink.org.nz/v1/gtfs/stop_times?trip_id=" + tmp.trip_id, {
-              headers: {
-                Accept: "application/json",
-                "X-Api-Key": "XnPEruR43jMSavfhQjKi326cwXn4knm78P7bvkY0",
-              },
-            })
-              .then((response) => {
-                return response.json();
-              })
-              .then((json) => {
-                console.log("API call made");
-                tmp.stopTimes = Array.from(json).map((stopTime) => {
-                  return stopTime as unknown as IStopTime;
-                });
-                setLoading(false);
-              });
+        // let stopTimes = Array.from(json).map((trip) => {
+        //   let tmp = trip as unknown as ITrip;
 
-            return tmp;
-          })
-        );
+        //   fetch("https://api.opendata.metlink.org.nz/v1/gtfs/stop_times?trip_id=" + tmp.trip_id, {
+        //     headers: {
+        //       Accept: "application/json",
+        //       "X-Api-Key": "XnPEruR43jMSavfhQjKi326cwXn4knm78P7bvkY0",
+        //     },
+        //   })
+        //     .then((response) => {
+        //       return response.json();
+        //     })
+        //     .then((json) => {
+        //       console.log("API call made");
+        //       tmp.stopTimes = Array.from(json).map((stopTime) => {
+        //         return stopTime as unknown as IStopTime;
+        //       });
+        //       return tmp;
+        //     });
+        // })
+
+        // setTrips(stopTimes);
+
+        setLoading(false);
         return;
       });
   };
