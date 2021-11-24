@@ -8,9 +8,9 @@ function RoutePage({ id }: any): JSX.Element {
 
   return (
     <div>
-      <h1>Route: {id}</h1>
+      <h1>Metlink Route ID: {id}</h1>
       {loading ? (
-        <p>loading...</p>
+        <p>loading..</p>
       ) : (
         trips?.map((trip) => {
           return <TripRow key={trip.trip_id} trip={trip} />;
